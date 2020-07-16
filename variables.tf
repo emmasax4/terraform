@@ -21,6 +21,12 @@ variable "description" {
   description = "An optional description of the repository"
 }
 
+variable "homepage_url" {
+  type        = string
+  default     = ""
+  description = "An optional homepage URL to put on the repository"
+}
+
 variable "topics" {
   type        = list
   default     = []

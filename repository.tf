@@ -6,6 +6,7 @@ resource "github_repository" "repo" {
   name                   = var.repository_name
   visibility             = var.visibility
   description            = var.description
+  homepage_url           = var.homepage_url
   topics                 = local.topics
   has_issues             = var.issues
   has_projects           = var.projects

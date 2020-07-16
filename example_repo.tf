@@ -1,8 +1,10 @@
 module "example_repo" {
   source = "../terraform"
 
-  repository_name = "example_repo"
-  description     = "Some random description here"
+  repository_name     = "example_repo"
+  description         = "Some random description here"
+  default_branch      = "main"
+  additional_branches = ["gh-pages"]
 
   users = {
     "a-woodard" = { permission = "pull" }
@@ -13,8 +15,6 @@ module "example_repo" {
     "labels-in-different" = "D9534F"
     "colors"              = "555555"
   }
-
-  additional_branches = ["gh-pages"]
 
   branches_to_protect = {
     "main" = {

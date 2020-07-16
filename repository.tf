@@ -19,6 +19,5 @@ resource "github_repository" "repo" {
 
   lifecycle {
     ignore_changes = [auto_init]
-    # prevent_destroy = true # Not sure if I want this value here or not
   }
 }

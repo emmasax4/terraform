@@ -33,6 +33,12 @@ variable "topics" {
   description = "An optional list of topic strings to add to the repository"
 }
 
+variable "is_template" {
+  type        = bool
+  default     = false
+  description = "Whether the repository should be a GitHub template"
+}
+
 variable "issues" {
   type        = bool
   default     = true

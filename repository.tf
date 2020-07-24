@@ -7,6 +7,7 @@ resource "github_repository" "repo" {
   visibility             = var.visibility
   description            = var.description
   homepage_url           = var.homepage_url
+  is_template            = var.is_template
   topics                 = local.topics
   has_issues             = var.issues
   has_projects           = var.projects

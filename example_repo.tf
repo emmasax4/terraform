@@ -7,7 +7,7 @@ module "example_repo" {
   additional_branches = ["gh-pages"]
 
   users = {
-    "a-woodard" = { permission = "pull" }
+    "octokit" = { permission = "pull" }
   }
 
   labels = {

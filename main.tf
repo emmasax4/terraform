@@ -1,5 +1,5 @@
 locals {
-  github_token = yamldecode(file("~/.github_config.yml"))[":github_token"]
+  github_token = yamldecode(file("~/.git_config.yml"))[":github_token"]
 }
 
 provider "github" {

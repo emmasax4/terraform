@@ -6,6 +6,7 @@ resource "github_repository" "repo" {
   name                   = var.repository_name
   visibility             = var.visibility
   description            = var.description
+  archived               = var.archived
   homepage_url           = var.homepage_url
   is_template            = var.is_template
   topics                 = local.topics
@@ -20,6 +21,6 @@ resource "github_repository" "repo" {
   auto_init              = true
 
   lifecycle {
-    ignore_changes = [auto_init, archived]
+    ignore_changes = [auto_init]
   }
 }

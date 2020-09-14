@@ -21,6 +21,12 @@ variable "description" {
   description = "An optional description of the repository"
 }
 
+variable "archived" {
+  type        = bool
+  default     = false
+  description = "Whether the repository should be archived or not; the API does not support unarchiving, so unarchival must happen through the GitHub browser"
+}
+
 variable "homepage_url" {
   type        = string
   default     = ""

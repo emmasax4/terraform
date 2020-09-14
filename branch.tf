@@ -1,5 +1,5 @@
 locals {
-  branches      = distinct(concat(var.additional_branches, [var.default_branch]))
+  branches      = setsubtract(distinct(concat(var.additional_branches, [var.source_branch], [var.default_branch])), ["master"])
   delete_branch = var.default_branch == "master" ? [] : ["master"]
 }
 
@@ -10,8 +10,11 @@ resource "github_branch" "branch" {
   source_branch = var.source_branch
 
   lifecycle {
-    ignore_changes        = [branch, source_branch]
     create_before_destroy = true
+    ignore_changes = [
+      branch,
+      source_branch
+    ]
   }
 }
 

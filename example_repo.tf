@@ -3,11 +3,12 @@ module "example_repo" {
 
   repository_name     = "example_repo"
   description         = "Some random description here"
+  visibility          = "public"
   default_branch      = "main"
   additional_branches = ["gh-pages"]
 
   users = {
-    "octokit" = { permission = "pull" }
+    "octokit" = { permission = "push" }
   }
 
   labels = {

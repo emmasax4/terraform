@@ -5,10 +5,10 @@ module "example_repo" {
   description         = "Some random description here"
   visibility          = "public"
   default_branch      = "main"
-  additional_branches = ["gh-pages"]
+  additional_branches = ["other-branch"]
 
   users = {
-    "octokit" = { permission = "push" }
+    "akw7" = { permission = "push" }
   }
 
   labels = {
@@ -23,7 +23,7 @@ module "example_repo" {
       up_to_date            = true
       status_check_contexts = ["test", "codeclimate"]
     }
-    "gh-pages" = {
+    "other-branch" = {
       enforce_admins        = false
       up_to_date            = true
       status_check_contexts = []

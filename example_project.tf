@@ -6,7 +6,7 @@ module "example_project" {
   visibility          = "public"
   additional_branches = ["other-branch"]
 
-  users = {
+  additional_users = {
     "akw7" = { permission = "developer" }
   }
 

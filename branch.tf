@@ -2,7 +2,7 @@
 # to change default branches:
 # - change default_branch variable to new branch
 # - set source_branch to old default branch
-# - optionally, protec the new default branch
+# - optionally, protect the new default branch (not in this file)
 # - run tf
 # - remove source_branch
 # - add delete_branches with old default branch

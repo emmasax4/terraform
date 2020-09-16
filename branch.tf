@@ -1,4 +1,4 @@
-# TODO: make switching default branches easier (including deleting branches and unprotecting default-branches-to-be-deleted)
+# TODO: documentation about the changing of default branches, and the creation/deletion of other branches
 # to change default branches:
 # - change default_branch variable to new branch
 # - set source_branch to old default branch
@@ -6,17 +6,17 @@
 # - run tf
 # - remove source_branch
 # - add delete_branches with old default branch
-# - add unprotect_branches with old default branch
+# - add unprotect_branches with old default branch (if not removed in previous step)
 # - run tf
 # - remove delete_branches and unprotect_branches
 
 locals {
-  branches      = setsubtract(distinct(concat(var.additional_branches, [var.source_branch], [var.default_branch])), ["master"])
-  delete_branch = var.default_branch == "master" ? [] : ["master"]
+  branches_to_create = setsubtract(distinct(concat(var.additional_branches, [var.source_branch], [var.default_branch])), ["master"])
+  delete_branch      = var.default_branch == "master" ? [] : ["master"]
 }
 
-resource "null_resource" "gitlab_branch" {
-  for_each = toset(local.branches)
+resource "null_resource" "create_branch" {
+  for_each = toset(local.branches_to_create)
 
   depends_on = [
     gitlab_project.project
@@ -30,7 +30,7 @@ resource "null_resource" "gitlab_branch" {
 resource "null_resource" "update_default_branch" {
   depends_on = [
     gitlab_project.project,
-    null_resource.gitlab_branch
+    null_resource.create_branch
   ]
 
   triggers = {
@@ -42,12 +42,30 @@ resource "null_resource" "update_default_branch" {
   }
 }
 
-resource "null_resource" "unprotect_master_branch" {
-  for_each = setsubtract(toset(local.delete_branch), local.branches)
+resource "null_resource" "unprotect_branch" {
+  for_each = setsubtract(toset(var.branches_to_unprotect), toset(keys(var.branches_to_protect)))
 
   depends_on = [
     gitlab_project.project,
-    null_resource.gitlab_branch,
+    null_resource.create_branch,
+    null_resource.update_default_branch
+  ]
+
+  triggers = {
+    branches_to_unprotect = join(", ", var.branches_to_unprotect)
+  }
+
+  provisioner "local-exec" {
+    command = "curl -H 'PRIVATE-TOKEN: ${local.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/protected_branches/${each.value}'"
+  }
+}
+
+resource "null_resource" "unprotect_master_branch" {
+  for_each = setsubtract(toset(local.delete_branch), local.branches_to_create)
+
+  depends_on = [
+    gitlab_project.project,
+    null_resource.create_branch,
     null_resource.update_default_branch
   ]
 
@@ -60,12 +78,29 @@ resource "null_resource" "unprotect_master_branch" {
   }
 }
 
-resource "null_resource" "delete_master_branch" {
-  for_each = setsubtract(toset(local.delete_branch), local.branches)
+resource "null_resource" "delete_branch" {
+  for_each = setsubtract(toset(var.branches_to_delete), toset(local.branches_to_create))
 
   depends_on = [
     gitlab_project.project,
-    null_resource.gitlab_branch,
+    null_resource.create_branch
+  ]
+
+  triggers = {
+    branches_to_delete = join(", ", var.branches_to_delete)
+  }
+
+  provisioner "local-exec" {
+    command = "curl -H 'PRIVATE-TOKEN: ${local.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/repository/branches/${each.value}'"
+  }
+}
+
+resource "null_resource" "delete_master_branch" {
+  for_each = setsubtract(toset(local.delete_branch), local.branches_to_create)
+
+  depends_on = [
+    gitlab_project.project,
+    null_resource.create_branch,
     null_resource.update_default_branch,
     null_resource.unprotect_master_branch
   ]

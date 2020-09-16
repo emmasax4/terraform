@@ -1,7 +1,7 @@
 resource "null_resource" "gitignore_file" {
   depends_on = [
     gitlab_project.project,
-    null_resource.gitlab_branch
+    null_resource.create_branch
   ]
 
   provisioner "local-exec" {

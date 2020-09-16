@@ -3,18 +3,11 @@ variable "project_name" {
   description = "The name of the project to manage"
 }
 
-# TODO: make the terraform work with both user accounts and gitlab groups
-# variable "gitlab_namespace" {
-#   type        = string
-#   default     = "emmasax4"
-#   description = "The GitLab namespace this Terraform is running on"
-# }
-
-# variable "group_id" {
-#   type = number
-#   default = 0
-#   description = "The ID of the GitLab group to create the project under (if no group, then leave out)"
-# }
+variable "gitlab_group" {
+  type        = string
+  default     = ""
+  description = "The name of the GitLab group to create the project under (if running for an individual user, then leave this option out)"
+}
 
 variable "visibility" {
   type        = string
@@ -65,6 +58,18 @@ variable "branches_to_protect" {
   }))
   default     = {}
   description = "An optional list of branches to protect and what the branch protection settings should be; the default branch should be added to this list if desired"
+}
+
+variable "branches_to_unprotect" {
+  type        = list
+  default     = []
+  description = "An optional list of branches to remove the protection from"
+}
+
+variable "branches_to_delete" {
+  type        = list
+  default     = []
+  description = "An optional list of branches to be deleted from the project"
 }
 
 variable "tags" {
@@ -133,7 +138,7 @@ variable "delete_branch_after_merge" {
   description = "Whether to delete source branches after merging a merge request"
 }
 
-variable "users" {
+variable "additional_users" {
   type = map(object({
     permission = string
   }))

@@ -1,20 +1,16 @@
 locals {
-  tags = concat(var.tags, ["managed-by-terraform"])
-  # group_ids = var.group_id > 0 ? [tostring(var.group_id)] : []
-  # namespace = var.group_id > 0 ? gitlab_group.namespace.id : null
+  tags            = concat(var.tags, ["managed-by-terraform"])
+  group_namespace = length(var.gitlab_group) > 0 ? [var.gitlab_group] : []
 }
 
-# data "gitlab_group" "namespace" {
-#   for_each = toset(local.group_ids)
-#   group_id = tonumber(each.value)
-# }
-
-# data "gitlab_user" "user" {
-#   username = var.gitlab_namespace # if the namespace owner is there...
-# }
+data "gitlab_group" "namespace" {
+  for_each  = toset(local.group_namespace)
+  full_path = each.value
+}
 
 resource "gitlab_project" "project" {
   name                                  = var.project_name
+  namespace_id                          = length(var.gitlab_group) > 0 ? data.gitlab_group.namespace[var.gitlab_group].id : null
   visibility_level                      = var.visibility
   description                           = var.description
   initialize_with_readme                = var.initial_readme
@@ -30,14 +26,4 @@ resource "gitlab_project" "project" {
   only_allow_merge_if_pipeline_succeeds = var.require_pipeline_successful
   merge_method                          = var.merge_method
   remove_source_branch_after_merge      = var.delete_branch_after_merge
-
-  # TODO: make the terraform work with both user accounts and gitlab groups
-
-  # namespace_id = data.gitlab_user.user.id
-
-  # lifecycle {
-  #   ignore_changes = [
-  #     auto_init
-  #   ]
-  # }
 }

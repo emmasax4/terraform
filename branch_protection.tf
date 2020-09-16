@@ -6,7 +6,7 @@ resource "gitlab_branch_protection" "branch_protection" {
   merge_access_level = each.value.merge_access
 
   depends_on = [
-    null_resource.gitlab_branch
+    null_resource.create_branch
   ]
 }
 

@@ -27,12 +27,6 @@ variable "archived" {
   description = "Whether the project should be archived or not"
 }
 
-variable "initial_readme" {
-  type        = bool
-  default     = true
-  description = "Whether to create an initial README document or not"
-}
-
 variable "default_branch" {
   type        = string
   default     = "main"
@@ -48,7 +42,7 @@ variable "additional_branches" {
 variable "source_branch" {
   type        = string
   default     = "master"
-  description = "The name of the source branch to use when creating new branches"
+  description = "The branch that the new branch's source is from; this should only be used temporarily when adding branches"
 }
 
 variable "branches_to_protect" {
@@ -104,13 +98,13 @@ variable "wiki" {
 
 variable "container_registry" {
   type        = bool
-  default     = true
+  default     = false
   description = "Whether the project should allow container registry"
 }
 
 variable "snippets" {
   type        = bool
-  default     = true
+  default     = false
   description = "Whether the project should allow snippets"
 }
 
@@ -138,7 +132,7 @@ variable "delete_branch_after_merge" {
   description = "Whether to delete source branches after merging a merge request"
 }
 
-variable "additional_users" {
+variable "users" {
   type = map(object({
     permission = string
   }))

@@ -3,10 +3,10 @@ variable "project_name" {
   description = "The name of the project to manage"
 }
 
-variable "gitlab_group" {
+variable "group_owner" {
   type        = string
   default     = ""
-  description = "The name of the GitLab group to create the project under (if running for an individual user, then leave this option out)"
+  description = "The owning GitLab group this Terraform is running on; if running for a user, then leave this out and it will use the owning GitLab user of the API token"
 }
 
 variable "visibility" {

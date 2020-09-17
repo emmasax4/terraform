@@ -1,6 +1,6 @@
 locals {
   tags            = concat(var.tags, ["managed-by-terraform"])
-  group_namespace = length(var.gitlab_group) > 0 ? [var.gitlab_group] : []
+  group_namespace = length(var.group_owner) > 0 ? [var.group_owner] : []
 }
 
 data "gitlab_group" "namespace" {
@@ -10,7 +10,7 @@ data "gitlab_group" "namespace" {
 
 resource "gitlab_project" "project" {
   name                                  = var.project_name
-  namespace_id                          = length(var.gitlab_group) > 0 ? data.gitlab_group.namespace[var.gitlab_group].id : null
+  namespace_id                          = length(var.group_owner) > 0 ? data.gitlab_group.namespace[var.group_owner].id : null
   visibility_level                      = var.visibility
   description                           = var.description
   initialize_with_readme                = true

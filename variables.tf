@@ -3,10 +3,10 @@ variable "repository_name" {
   description = "The name of the repository to manage"
 }
 
-variable "github_owner" {
+variable "owner" {
   type        = string
   default     = "emmasax4"
-  description = "The GitHub owner this Terraform is running on"
+  description = "The GitHub owner (organization or user) this Terraform is running on"
 }
 
 variable "visibility" {

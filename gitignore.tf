@@ -1,4 +1,5 @@
 resource "github_repository_file" "gitignore" {
+  count          = var.create_gitignore ? 1 : 0
   repository     = github_repository.repo.name
   branch         = var.default_branch
   file           = ".gitignore"

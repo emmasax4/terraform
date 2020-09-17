@@ -93,6 +93,12 @@ variable "delete_branch_on_merge" {
   description = "Whether the repository should delete head branches on merge of a pull request"
 }
 
+variable "create_gitignore" {
+  type        = bool
+  default     = true
+  description = "Whether to create a new .gitignore file"
+}
+
 variable "users" {
   type = map(object({
     permission = string

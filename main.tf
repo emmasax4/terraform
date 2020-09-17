@@ -4,6 +4,6 @@ locals {
 
 provider "github" {
   token   = local.github_token
-  owner   = var.github_owner
+  owner   = var.owner
   version = "~> 3.0.0"
 }

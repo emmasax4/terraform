@@ -1,4 +1,5 @@
 resource "null_resource" "gitignore_file" {
+  count = var.create_gitignore ? 1 : 0
   depends_on = [
     gitlab_project.project,
     null_resource.create_branch

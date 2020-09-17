@@ -132,6 +132,12 @@ variable "delete_branch_after_merge" {
   description = "Whether to delete source branches after merging a merge request"
 }
 
+variable "create_gitignore" {
+  type        = bool
+  default     = true
+  description = "Whether to create a new .gitignore file"
+}
+
 variable "users" {
   type = map(object({
     permission = string
@@ -144,4 +150,10 @@ variable "labels" {
   type        = map(string)
   default     = {}
   description = "A list of additional labels to add to the project"
+}
+
+variable "is_import" {
+  type        = bool
+  default     = false
+  description = "Whether the project was imported or not"
 }

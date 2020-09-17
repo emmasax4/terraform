@@ -1,6 +1,5 @@
 locals {
   branches_to_create = setsubtract(distinct(concat(var.additional_branches, [var.source_branch], [var.default_branch])), ["master"])
-  delete_branch      = var.default_branch == "master" ? [] : ["master"]
 }
 
 resource "null_resource" "create_branch" {
@@ -84,7 +83,7 @@ resource "null_resource" "delete_branch" {
 }
 
 resource "null_resource" "delete_master_branch" {
-  for_each = setsubtract(toset(local.delete_branch), local.branches_to_create)
+  for_each = setsubtract(toset(var.default_branch == "master" ? [] : ["master"]), local.branches_to_create)
 
   depends_on = [
     gitlab_project.project,

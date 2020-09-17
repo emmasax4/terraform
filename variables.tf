@@ -116,7 +116,7 @@ variable "required_approvals" {
 
 variable "require_pipeline_successful" {
   type        = bool
-  default     = true
+  default     = false
   description = "Require all CI/CD pipelines to be successful before merging a merge request"
 }
 

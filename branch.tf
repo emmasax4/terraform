@@ -49,8 +49,6 @@ resource "null_resource" "unprotect_branch" {
 }
 
 resource "null_resource" "unprotect_master_branch" {
-  for_each = setsubtract(toset(local.delete_branch), local.branches_to_create)
-
   depends_on = [
     gitlab_project.project,
     null_resource.create_branch,

@@ -9,6 +9,3 @@ resource "gitlab_branch_protection" "branch_protection" {
     null_resource.create_branch
   ]
 }
-
-# TODO: update documentation for branch protection
-# no one, developer, maintainer

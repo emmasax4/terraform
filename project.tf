@@ -13,7 +13,7 @@ resource "gitlab_project" "project" {
   namespace_id                          = length(var.gitlab_group) > 0 ? data.gitlab_group.namespace[var.gitlab_group].id : null
   visibility_level                      = var.visibility
   description                           = var.description
-  initialize_with_readme                = var.initial_readme
+  initialize_with_readme                = true
   archived                              = var.archived
   tags                                  = local.tags
   issues_enabled                        = var.issues

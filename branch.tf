@@ -1,15 +1,3 @@
-# TODO: documentation about the changing of default branches, and the creation/deletion of other branches
-# to change default branches:
-# - change default_branch variable to new branch
-# - set source_branch to old default branch
-# - optionally, protect the new default branch (not in this file)
-# - run tf
-# - remove source_branch
-# - add delete_branches with old default branch
-# - add unprotect_branches with old default branch (if not removed in previous step)
-# - run tf
-# - remove delete_branches and unprotect_branches
-
 locals {
   branches_to_create = setsubtract(distinct(concat(var.additional_branches, [var.source_branch], [var.default_branch])), ["master"])
   delete_branch      = var.default_branch == "master" ? [] : ["master"]
@@ -83,7 +71,9 @@ resource "null_resource" "delete_branch" {
 
   depends_on = [
     gitlab_project.project,
-    null_resource.create_branch
+    null_resource.create_branch,
+    null_resource.unprotect_branch,
+    null_resource.update_default_branch
   ]
 
   triggers = {

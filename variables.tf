@@ -78,6 +78,12 @@ variable "pipelines" {
   description = "Whether the project should allow GitLab CI/CD pipelines"
 }
 
+variable "packages" {
+  type        = bool
+  default     = false
+  description = "Whether the project has packages enabled"
+}
+
 variable "issues" {
   type        = bool
   default     = true

@@ -3,5 +3,6 @@ locals {
 }
 
 provider "gitlab" {
-  token = local.gitlab_token
+  token   = local.gitlab_token
+  version = "~> 3.0.0"
 }

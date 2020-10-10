@@ -16,6 +16,7 @@ resource "gitlab_project" "project" {
   merge_requests_enabled                = var.merge_requests
   pipelines_enabled                     = var.pipelines
   wiki_enabled                          = var.wiki
+  packages_enabled                      = var.packages
   container_registry_enabled            = var.container_registry
   snippets_enabled                      = var.snippets
   approvals_before_merge                = var.required_approvals

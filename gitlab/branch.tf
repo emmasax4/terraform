@@ -10,7 +10,7 @@ resource "null_resource" "create_branch" {
   ]
 
   provisioner "local-exec" {
-    command = "curl -H 'PRIVATE-TOKEN: ${local.gitlab_token}' -X POST 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/repository/branches?branch=${each.value}&ref=${var.source_branch}'"
+    command = "curl -H 'PRIVATE-TOKEN: ${var.gitlab_token}' -X POST 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/repository/branches?branch=${each.value}&ref=${var.source_branch}'"
   }
 }
 
@@ -25,7 +25,7 @@ resource "null_resource" "update_default_branch" {
   }
 
   provisioner "local-exec" {
-    command = "curl -H 'PRIVATE-TOKEN: ${local.gitlab_token}' -X PUT --data 'default_branch=${var.default_branch}' 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}'"
+    command = "curl -H 'PRIVATE-TOKEN: ${var.gitlab_token}' -X PUT --data 'default_branch=${var.default_branch}' 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}'"
   }
 }
 
@@ -43,7 +43,7 @@ resource "null_resource" "unprotect_branch" {
   }
 
   provisioner "local-exec" {
-    command = "curl -H 'PRIVATE-TOKEN: ${local.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/protected_branches/${each.value}'"
+    command = "curl -H 'PRIVATE-TOKEN: ${var.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/protected_branches/${each.value}'"
   }
 }
 
@@ -59,7 +59,7 @@ resource "null_resource" "unprotect_master_branch" {
   }
 
   provisioner "local-exec" {
-    command = "curl -H 'PRIVATE-TOKEN: ${local.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/protected_branches/master'"
+    command = "curl -H 'PRIVATE-TOKEN: ${var.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/protected_branches/master'"
   }
 }
 
@@ -78,7 +78,7 @@ resource "null_resource" "delete_branch" {
   }
 
   provisioner "local-exec" {
-    command = "curl -H 'PRIVATE-TOKEN: ${local.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/repository/branches/${each.value}'"
+    command = "curl -H 'PRIVATE-TOKEN: ${var.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/repository/branches/${each.value}'"
   }
 }
 
@@ -97,6 +97,6 @@ resource "null_resource" "delete_master_branch" {
   }
 
   provisioner "local-exec" {
-    command = "curl -H 'PRIVATE-TOKEN: ${local.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/repository/branches/master'"
+    command = "curl -H 'PRIVATE-TOKEN: ${var.gitlab_token}' -X DELETE 'https://gitlab.com/api/v4/projects/${gitlab_project.project.id}/repository/branches/master'"
   }
 }

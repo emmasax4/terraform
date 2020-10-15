@@ -1,3 +1,8 @@
+variable "gitlab_token" {
+  type        = string
+  description = "The GitLab personal token to use"
+}
+
 variable "project_name" {
   type        = string
   description = "The name of the project to manage"

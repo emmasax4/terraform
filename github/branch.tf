@@ -29,7 +29,7 @@ resource "null_resource" "update_default_branch" {
   }
 
   provisioner "local-exec" {
-    command = "curl -H 'Authorization: token ${local.github_token}' --request PATCH --data '{\"default_branch\": \"${var.default_branch}\" }' https://api.github.com/repos/${var.owner}/${github_repository.repo.name}"
+    command = "curl -H 'Authorization: token ${var.github_token}' --request PATCH --data '{\"default_branch\": \"${var.default_branch}\" }' https://api.github.com/repos/${var.owner}/${github_repository.repo.name}"
   }
 }
 
@@ -47,6 +47,6 @@ resource "null_resource" "delete_master_branch" {
   }
 
   provisioner "local-exec" {
-    command = "curl -H 'Authorization: token ${local.github_token}' -X DELETE https://api.github.com/repos/${var.owner}/${github_repository.repo.name}/git/refs/heads/master"
+    command = "curl -H 'Authorization: token ${var.github_token}' -X DELETE https://api.github.com/repos/${var.owner}/${github_repository.repo.name}/git/refs/heads/master"
   }
 }

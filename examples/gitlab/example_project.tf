@@ -1,5 +1,6 @@
 module "example_project" {
-  source = "../terraform"
+  # When running locally, use '../../gitlab'
+  source = "git@github.com:emmasax4/terraform.git//gitlab?ref=main"
 
   project_name        = "example_project"
   description         = "Some random description here"

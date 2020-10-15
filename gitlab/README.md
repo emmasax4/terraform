@@ -56,7 +56,7 @@ The Terraform GitLab provider will use a GitLab API token, passed in as a requir
 
 ```hcl
 module "example_project" {
-  source = "../terraform"
+  source = "git@github.com:emmasax4/terraform.git//gitlab?ref=main"
 
   gitlab_token = "1234567890_abcdef"
 

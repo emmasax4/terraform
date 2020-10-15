@@ -1,3 +1,8 @@
+variable "github_token" {
+  type        = string
+  description = "The GitHub personal access token to use"
+}
+
 variable "repository_name" {
   type        = string
   description = "The name of the repository to manage"

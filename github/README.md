@@ -1,4 +1,4 @@
-# tf-github
+# GitHub Module
 
 ## Table of Contents
 

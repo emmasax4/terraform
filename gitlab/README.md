@@ -1,14 +1,5 @@
 # GitLab Module
 
-The Terraform GitLab provider will use a GitLab API token defined in a file (`~/.git_config.yml`) like this:
-
-```
-:gitlab_user: GITLAB-USERNAME
-:gitlab_token: GITLAB-TOKEN
-```
-
-To see the GitLab tokens you have already created, or to create a new one, look [here](https://gitlab.com/profile/personal_access_tokens). The token should have `api` permissions at the minimum.
-
 ## Table of Contents
 
 * [Inputs](#inputs)
@@ -40,6 +31,7 @@ To see the GitLab tokens you have already created, or to create a new one, look 
 | default_branch | The default branch | `"main"` |
 | delete_branch_after_merge | Whether to delete source branches after merging a merge request | `true` |
 | description | An optional description of the project | `""` |
+| gitlab_token * | The GitLab personal token to use | |
 | group_owner | The owning GitLab group this Terraform is running on; if running for a user, then leave this out and it will use the owning GitLab user of the API token | `""` |
 | issues | Whether the project should allow issues | `true` |
 | is_import | Whether the project was imported or not | `false` |
@@ -58,11 +50,15 @@ To see the GitLab tokens you have already created, or to create a new one, look 
 | visibility | Whether the project should be private or public | `"private"` |
 | wiki | Whether the project should allow the wiki | `false` |
 
+The Terraform GitLab provider will use a GitLab API token, passed in as a required variable `gitlab_token`. To see the GitLab tokens you have already created, or to create a new one, look [here](https://gitlab.com/profile/personal_access_tokens). The token should have `api` permissions at the minimum.
+
 ## Example
 
 ```hcl
 module "example_project" {
   source = "../terraform"
+
+  gitlab_token = "1234567890_abcdef"
 
   project_name = "example_project"
   visibility   = "public"

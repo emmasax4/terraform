@@ -2,6 +2,7 @@ module "example_project" {
   # When running locally, use '../../gitlab'
   source = "git@github.com:emmasax4/terraform.git//gitlab?ref=main"
 
+  # When running this example, put your own token in here
   gitlab_token = "1234567890_abcdef"
 
   project_name        = "example_project"

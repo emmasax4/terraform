@@ -11,11 +11,14 @@ resource "github_branch_protection" "branch_protection" {
     contexts = each.value.status_check_contexts
   }
 
-  required_pull_request_reviews {
-    dismiss_stale_reviews           = each.value.dismiss_stale_reviews
-    dismissal_restrictions          = each.value.dismissal_restrictions
-    require_code_owner_reviews      = each.value.require_code_owner_reviews
-    required_approving_review_count = each.value.required_approving_review_count == 0 ? 1 : each.value.required_approving_review_count
+  dynamic "required_pull_request_reviews" {
+    for_each = each.value.require_pull_request_reviews ? [each.value.require_pull_request_reviews] : []
+    content {
+      dismiss_stale_reviews           = each.value.dismiss_stale_reviews
+      dismissal_restrictions          = each.value.dismissal_restrictions
+      require_code_owner_reviews      = each.value.require_code_owner_reviews
+      required_approving_review_count = each.value.required_approving_review_count == 0 ? 1 : each.value.required_approving_review_count
+    }
   }
 
   depends_on = [

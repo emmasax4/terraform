@@ -23,6 +23,7 @@
 |------|-------------|---------|
 | additional_branches | An optional list of long-lived branch names to add to the repository; the default branch does not need to be in this list | `[]` |
 | archived | Whether the repository should be archived or not; the API does not support unarchiving, so unarchival must happen through the GitHub browser | `false` |
+| archive_on_destroy | Whether or not to archive the repository instead of fully deleting it | `false` |
 | branches_to_protect | An optional list of branches to protect and what the branch protection settings should be; the default branch should be added to this list if desired | `{}` |
 | create_gitignore | Whether to create a new `.gitignore` file | `true` |
 | default_branch | The default branch | `"main"` |
@@ -39,8 +40,9 @@
 | projects | Whether the repository should allow projects | `false` |
 | rebase_commit | Whether the repository should allow rebase commits | `false`
 | repository_name * | The name of the repository to manage | |
-| source_branch | The branch that the new branch's source is from; this should only be used temporarily when adding branches | `"master"` |
+| source_branch | The branch that the new branch's source is from; this should only be used temporarily when adding branches | `"main"` |
 | squash_commit | Whether the repository should allow squash commits | `true` |
+| template | The optional owner and template repository that the new repository should be based on | `{ owner = "", repository = "" }` |
 | topics | An optional list of topic strings to add to the repository | `[]` |
 | users | An optional list of individual users that should have special permissions | `{}` |
 | visibility | Whether the repository should be private or public | `"private"` |
@@ -60,6 +62,11 @@ module "example_repo" {
   visibility      = "private"
   description     = "Some random description here"
 
+  template = {
+    owner      = "github"
+    repository = "template"
+  }
+
   users = {
     "github-username"       = { permission = "pull" }
     "other-github-username" = { permission = "maintain" }
@@ -78,7 +85,7 @@ module "example_repo" {
     "dev" = {
       enforce_admins        = false
       up_to_date            = true
-      status_check_contexts = ["test", "codeclimate"]
+      status_check_contexts = ["travis-ci", "codeclimate"]
     }
     "publish" = {
       enforce_admins        = false
@@ -195,7 +202,7 @@ Change the of the `default_branch` variable in the repository's file. The new de
 
 ### Creating a New Default Branch
 
-If you are creating a new branch, add the `source_branch` variable and set it to be the source of the new branch you're creating, which is most likely the existing default branch (default is `master`).
+If you are creating a new branch, add the `source_branch` variable and set it to be the source of the new branch you're creating, which is most likely the existing default branch (default is `main`).
 
 Run:
 

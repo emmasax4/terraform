@@ -1,7 +1,3 @@
-locals {
-  require_pull_request_reviews = var.require_pull_request_reviews ? [var.require_pull_request_reviews] : []
-}
-
 resource "github_branch_protection" "branch_protection" {
   for_each               = var.branches_to_protect
   repository_id          = github_repository.repo.node_id

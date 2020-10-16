@@ -46,6 +46,7 @@
 | topics | An optional list of topic strings to add to the repository | `[]` |
 | users | An optional list of individual users that should have special permissions | `{}` |
 | visibility | Whether the repository should be private or public | `"private"` |
+| vulnerability_alerts | Whether to turn on Dependabot alerts | `true` |
 | wiki | Whether the repository should allow the wiki | `false` |
 
 The Terraform GitHub provider will use a GitHub API token, passed in as a required variable `github_token`. To see the GitHub tokens you have already created, or to create a new one, look [here](https://github.com/settings/tokens). The token should have `repo` and `delete_repo` permissions at the minimum.

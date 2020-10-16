@@ -15,6 +15,7 @@ resource "github_repository" "repo" {
   has_projects           = var.projects
   has_wiki               = var.wiki
   has_downloads          = var.downloads
+  vulnerability_alerts   = var.vulnerability_alerts
   allow_merge_commit     = var.merge_commit
   allow_squash_merge     = var.squash_commit
   allow_rebase_merge     = var.rebase_commit

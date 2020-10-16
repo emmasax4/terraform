@@ -84,14 +84,28 @@ module "example_repo" {
 
   branches_to_protect = {
     "dev" = {
-      enforce_admins        = false
-      up_to_date            = true
-      status_check_contexts = ["travis-ci", "codeclimate"]
+      enforce_admins                  = false
+      up_to_date                      = true
+      status_check_contexts           = ["travis-ci", "codeclimate"]
+      require_code_owner_reviews      = false
+      required_approving_review_count = 0
+      require_signed_commits          = false
+      dismiss_stale_reviews           = false
+      push_restrictions               = []
+      require_pull_request_reviews    = false
+      dismissal_restrictions          = []
     }
     "publish" = {
-      enforce_admins        = false
-      up_to_date            = true
-      status_check_contexts = []
+      enforce_admins                  = false
+      up_to_date                      = true
+      status_check_contexts           = []
+      require_code_owner_reviews      = false
+      required_approving_review_count = 0
+      require_signed_commits          = false
+      dismiss_stale_reviews           = false
+      push_restrictions               = []
+      require_pull_request_reviews    = false
+      dismissal_restrictions          = []
     }
   }
 }
@@ -141,8 +155,7 @@ Add a file with a module for that repository, which is named the name of the rep
 Update the values of the repository module to match the existing repository. Set the `create_gitignore` variable to `false` unless you want Terraform to override your `.gitignore` file.
 
 Now import the repository:
-<!--hello-->
-<!--another secret-->
+
 ```
 terraform import module.EXISTING_REPO.github_repository.repo EXISTING_REPO_NAME
 ```

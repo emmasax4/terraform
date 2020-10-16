@@ -30,6 +30,7 @@ module "example_repo" {
       required_approving_review_count = 0
       require_signed_commits          = false
       dismiss_stale_reviews           = false
+      require_pull_request_reviews    = false
       push_restrictions               = []
       dismissal_restrictions          = []
     }
@@ -41,6 +42,7 @@ module "example_repo" {
       required_approving_review_count = 0
       require_signed_commits          = false
       dismiss_stale_reviews           = false
+      require_pull_request_reviews    = false
       push_restrictions               = []
       dismissal_restrictions          = []
     }

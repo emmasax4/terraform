@@ -163,6 +163,7 @@ variable "branches_to_protect" {
     require_signed_commits          = bool
     dismiss_stale_reviews           = bool
     dismissal_restrictions          = list(string)
+    require_pull_request_reviews    = bool
     require_code_owner_reviews      = bool
     required_approving_review_count = number # 0 if not requiring reviews, otherwise 1–6
   }))

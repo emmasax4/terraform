@@ -68,6 +68,12 @@ variable "is_template" {
   description = "Whether the repository should be a GitHub template"
 }
 
+variable "vulnerability_alerts" {
+  type        = bool
+  default     = true
+  description = "Whether to turn on Dependabot alerts"
+}
+
 variable "issues" {
   type        = bool
   default     = true

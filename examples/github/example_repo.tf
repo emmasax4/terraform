@@ -22,15 +22,27 @@ module "example_repo" {
   }
 
   branches_to_protect = {
-    "main" = {
-      enforce_admins        = false
-      up_to_date            = true
-      status_check_contexts = ["test", "codeclimate"]
+    "some-other-main" = {
+      enforce_admins                  = false
+      up_to_date                      = true
+      status_check_contexts           = ["test", "codeclimate"]
+      require_code_owner_reviews      = false
+      required_approving_review_count = 0
+      require_signed_commits          = false
+      dismiss_stale_reviews           = false
+      push_restrictions               = []
+      dismissal_restrictions          = []
     }
     "other-branch" = {
-      enforce_admins        = false
-      up_to_date            = true
-      status_check_contexts = []
+      enforce_admins                  = false
+      up_to_date                      = true
+      status_check_contexts           = []
+      require_code_owner_reviews      = false
+      required_approving_review_count = 0
+      require_signed_commits          = false
+      dismiss_stale_reviews           = false
+      push_restrictions               = []
+      dismissal_restrictions          = []
     }
   }
 }

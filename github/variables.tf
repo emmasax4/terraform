@@ -14,6 +14,18 @@ variable "owner" {
   description = "The GitHub owner (organization or user) this Terraform is running on"
 }
 
+variable "template" {
+  type = object({
+    owner      = string
+    repository = string
+  })
+  default = {
+    owner      = ""
+    repository = ""
+  }
+  description = "A list of ONE template that the repository should be based on"
+}
+
 variable "visibility" {
   type        = string
   default     = "private"
@@ -30,6 +42,12 @@ variable "archived" {
   type        = bool
   default     = false
   description = "Whether the repository should be archived or not; the API does not support unarchiving, so unarchival must happen through the GitHub browser"
+}
+
+variable "archive_on_destroy" {
+  type        = bool
+  default     = false
+  description = "Whether or not to archive the repository instead of fully deleting it"
 }
 
 variable "homepage_url" {
@@ -120,7 +138,7 @@ variable "default_branch" {
 
 variable "source_branch" {
   type        = string
-  default     = "master"
+  default     = "main"
   description = "The branch that the new branch's source is from; this should only be used temporarily when adding branches"
 }
 
@@ -132,9 +150,15 @@ variable "additional_branches" {
 
 variable "branches_to_protect" {
   type = map(object({
-    enforce_admins        = bool
-    up_to_date            = bool
-    status_check_contexts = list(string)
+    enforce_admins                  = bool
+    push_restrictions               = list(string)
+    up_to_date                      = bool
+    status_check_contexts           = list(string)
+    require_signed_commits          = bool
+    dismiss_stale_reviews           = bool
+    dismissal_restrictions          = list(string)
+    require_code_owner_reviews      = bool
+    required_approving_review_count = number # 1–6
   }))
   default     = {}
   description = "An optional list of branches to protect and what the branch protection settings should be; the default branch should be added to this list if desired"

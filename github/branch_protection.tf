@@ -15,7 +15,7 @@ resource "github_branch_protection" "branch_protection" {
     contexts = each.value.status_check_contexts
   }
 
-  dynamic "require_pull_request_reviews" {
+  dynamic "required_pull_request_reviews" {
     for_each = each.value.require_pull_request_reviews ? [each.value.require_pull_request_reviews] : []
     content {
       dismiss_stale_reviews           = each.value.dismiss_stale_reviews

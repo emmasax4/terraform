@@ -22,10 +22,10 @@ module "example_repo" {
   }
 
   branches_to_protect = {
-    "some-other-main" = {
+    "main" = {
       enforce_admins                  = false
       up_to_date                      = true
-      status_check_contexts           = ["test", "codeclimate"]
+      status_check_contexts           = ["travis-ci", "codeclimate"]
       require_code_owner_reviews      = false
       required_approving_review_count = 0
       require_signed_commits          = false

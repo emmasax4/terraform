@@ -85,7 +85,7 @@ module "example_repo" {
     "dev" = {
       enforce_admins        = false
       up_to_date            = true
-      status_check_contexts = ["test", "codeclimate"]
+      status_check_contexts = ["travis-ci", "codeclimate"]
     }
     "publish" = {
       enforce_admins        = false

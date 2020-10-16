@@ -23,7 +23,7 @@ variable "template" {
     owner      = ""
     repository = ""
   }
-  description = "A list of ONE template that the repository should be based on"
+  description = "The optional owner and template repository that the new repository should be based on"
 }
 
 variable "visibility" {
@@ -158,7 +158,7 @@ variable "branches_to_protect" {
     dismiss_stale_reviews           = bool
     dismissal_restrictions          = list(string)
     require_code_owner_reviews      = bool
-    required_approving_review_count = number # 1–6
+    required_approving_review_count = number # 0 if not requiring reviews, otherwise 1–6
   }))
   default     = {}
   description = "An optional list of branches to protect and what the branch protection settings should be; the default branch should be added to this list if desired"

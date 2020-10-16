@@ -42,7 +42,7 @@
 | repository_name * | The name of the repository to manage | |
 | source_branch | The branch that the new branch's source is from; this should only be used temporarily when adding branches | `"main"` |
 | squash_commit | Whether the repository should allow squash commits | `true` |
-| template | The GitHub repository template that should be used when creating the new repository | `{ owner = "", repository = "" }` |
+| template | The optional owner and template repository that the new repository should be based on | `{ owner = "", repository = "" }` |
 | topics | An optional list of topic strings to add to the repository | `[]` |
 | users | An optional list of individual users that should have special permissions | `{}` |
 | visibility | Whether the repository should be private or public | `"private"` |

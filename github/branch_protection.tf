@@ -1,3 +1,7 @@
+locals {
+  require_pull_request_reviews = var.require_pull_request_reviews ? [var.require_pull_request_reviews] : []
+}
+
 resource "github_branch_protection" "branch_protection" {
   for_each               = var.branches_to_protect
   repository_id          = github_repository.repo.node_id
@@ -11,11 +15,14 @@ resource "github_branch_protection" "branch_protection" {
     contexts = each.value.status_check_contexts
   }
 
-  required_pull_request_reviews {
-    dismiss_stale_reviews           = each.value.dismiss_stale_reviews
-    dismissal_restrictions          = each.value.dismissal_restrictions
-    require_code_owner_reviews      = each.value.require_code_owner_reviews
-    required_approving_review_count = each.value.required_approving_review_count == 0 ? 1 : each.value.required_approving_review_count
+  dynamic "require_pull_request_reviews" {
+    for_each = local.require_pull_request_reviews
+    content {
+      dismiss_stale_reviews           = each.value.dismiss_stale_reviews
+      dismissal_restrictions          = each.value.dismissal_restrictions
+      require_code_owner_reviews      = each.value.require_code_owner_reviews
+      required_approving_review_count = each.value.required_approving_review_count == 0 ? 1 : each.value.required_approving_review_count
+    }
   }
 
   depends_on = [

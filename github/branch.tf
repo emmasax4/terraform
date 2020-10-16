@@ -1,6 +1,6 @@
 locals {
-  branches      = setsubtract(distinct(concat(var.additional_branches, [var.source_branch], [var.default_branch])), ["master"])
-  delete_branch = var.default_branch == "master" ? [] : ["master"]
+  branches      = setsubtract(distinct(concat(var.additional_branches, [var.source_branch], [var.default_branch])), ["main"])
+  delete_branch = var.default_branch == "main" ? [] : ["main"]
 }
 
 resource "github_branch" "branch" {
@@ -33,7 +33,7 @@ resource "null_resource" "update_default_branch" {
   }
 }
 
-resource "null_resource" "delete_master_branch" {
+resource "null_resource" "delete_main_branch" {
   for_each = setsubtract(toset(local.delete_branch), local.branches)
 
   depends_on = [
@@ -43,10 +43,10 @@ resource "null_resource" "delete_master_branch" {
   ]
 
   triggers = {
-    branch_to_delete = "master"
+    branch_to_delete = "main"
   }
 
   provisioner "local-exec" {
-    command = "curl -H 'Authorization: token ${var.github_token}' -X DELETE https://api.github.com/repos/${var.owner}/${github_repository.repo.name}/git/refs/heads/master"
+    command = "curl -H 'Authorization: token ${var.github_token}' -X DELETE https://api.github.com/repos/${var.owner}/${github_repository.repo.name}/git/refs/heads/main"
   }
 }

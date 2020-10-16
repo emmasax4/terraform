@@ -1,5 +1,6 @@
 locals {
-  topics = concat(var.topics, ["managed-by-terraform"])
+  topics   = concat(var.topics, ["managed-by-terraform"])
+  template = length(var.template["owner"]) > 0 && length(var.template["repository"]) > 0 ? [var.template] : []
 }
 
 resource "github_repository" "repo" {
@@ -19,6 +20,15 @@ resource "github_repository" "repo" {
   allow_rebase_merge     = var.rebase_commit
   delete_branch_on_merge = var.delete_branch_on_merge
   auto_init              = true
+  archive_on_destroy     = var.archive_on_destroy
+
+  dynamic "template" {
+    for_each = local.template
+    content {
+      owner      = var.template["owner"]
+      repository = var.template["repository"]
+    }
+  }
 
   lifecycle {
     ignore_changes = [

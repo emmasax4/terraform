@@ -10,8 +10,9 @@ module "example_project" {
   visibility          = "public"
   additional_branches = ["other-branch"]
 
+  # If you run this, you may accidentally invite an actual GitLab user to your example project
   users = {
-    "akw7" = { permission = "developer" }
+    "gitlab-user" = { permission = "developer" }
   }
 
   labels = {

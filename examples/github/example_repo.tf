@@ -11,8 +11,9 @@ module "example_repo" {
   default_branch      = "main"
   additional_branches = ["other-branch"]
 
+  # If you run this, you may accidentally invite an actual GitHub user to your example repository
   users = {
-    "akw7" = { permission = "push" }
+    "github-user" = { permission = "push" }
   }
 
   labels = {

@@ -10,7 +10,7 @@ variable "repository_name" {
 
 variable "owner" {
   type        = string
-  default     = "emmasax4"
+  default     = "emmahsax"
   description = "The GitHub owner (organization or user) this Terraform is running on"
 }
 

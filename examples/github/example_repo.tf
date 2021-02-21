@@ -1,6 +1,6 @@
 module "example_repo" {
   # When running locally, use "../../github"
-  source = "git@github.com:emmasax4/terraform.git//github?ref=main"
+  source = "git@github.com:emmahsax/terraform.git//github?ref=main"
 
   # When running this example, put your own token in here
   github_token = "1234567890abcdefghi"

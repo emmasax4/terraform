@@ -36,7 +36,7 @@
 | is_template | Whether the repository should be a GitHub template | `false` |
 | labels | A list of additional labels to add to the repository | `{}` |
 | merge_commit | Whether the repository should allow merge commits | `false` |
-| owner | The GitHub owner (organization or user) this Terraform is running on | `"emmasax4"` |
+| owner | The GitHub owner (organization or user) this Terraform is running on | `"emmahsax"` |
 | projects | Whether the repository should allow projects | `false` |
 | rebase_commit | Whether the repository should allow rebase commits | `false`
 | repository_name * | The name of the repository to manage | |
@@ -55,7 +55,7 @@ The Terraform GitHub provider will use a GitHub API token, passed in as a requir
 
 ```hcl
 module "example_repo" {
-  source = "git@github.com:emmasax4/terraform.git//github?ref=main"
+  source = "git@github.com:emmahsax/terraform.git//github?ref=main"
 
   github_token = "1234567890abcdefghi"
 

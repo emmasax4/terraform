@@ -6,6 +6,14 @@ The modules here were `git filter-branch`ed from private projects where I previo
 
 ---
 
+### Contributing
+
+To submit a feature request, bug ticket, etc, please submit an official [GitHub Issue](https://github.com/emmahsax/terraform/issues/new).
+
+### Security Policy
+
+To report any security vulnerabilities, please view this repository's [Security Policy](https://github.com/emmahsax/terraform/security/policy).
+
 ### Licensing
 
 For information on licensing, please see [LICENSE.md](https://github.com/emmahsax/terraform/blob/main/LICENSE.md).

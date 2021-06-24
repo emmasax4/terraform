@@ -4,9 +4,17 @@ Terraform modules for GitHub and GitLab projects, repositories, labels, branches
 
 The modules here were `git filter-branch`ed from private projects where I previously stored both the terraform modules _and_ where I called the modules. Now, I'm breaking that out, so the modules are public, and where I call the modules are private. That's why some of the commit messages may look a bit funky.
 
+---
+
+### Licensing
+
+For information on licensing, please see [LICENSE.md](https://github.com/emmahsax/terraform/blob/main/LICENSE.md).
+
+### Code of Conduct
+
 When interacting with this repository, please follow [Contributor Covenant's Code of Conduct](https://contributor-covenant.org).
 
-## Archival Notice
+### Archival Notice
 
 This repository has been archived and designated as read-only. From GitHub's documentation:
 

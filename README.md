@@ -20,4 +20,4 @@ This repository has been archived and designated as read-only. From GitHub's doc
 
 > This will make the emmahsax/terraform repository, issues, pull requests, labels, milestones, projects, wiki, releases, commits, tags, branches, reactions and comments read-only and disable any future comments. The repository can still be forked.
 
-To unarchive this project at any time, please reach out to me at https://emmasax.com/contact-me/.
+To unarchive this repository at any time, please reach out to me at https://emmasax.com/contact-me/.
